@@ -35,6 +35,7 @@ use std::{
     },
     thread::{spawn, JoinHandle},
     time::{Duration, SystemTime, UNIX_EPOCH},
+    u8,
 };
 
 // The type to use for raw samples.
@@ -156,8 +157,28 @@ fn run() -> Result<()> {
     //         ch0.type_of()
     //     );
     // }
+    let u8_type = TypeId::of::<u8>();
+    let i8_type = TypeId::of::<i8>();
+    let u16_type = TypeId::of::<u16>();
+    let i16_type = TypeId::of::<i16>();
+    let u32_type = TypeId::of::<u32>();
+    let i32_type = TypeId::of::<i32>();
+    let f32_type = TypeId::of::<f32>();
+    let f64_type = TypeId::of::<f64>();
+
     match ch0.type_of() {
-        
+        Some(t) if t == u8_type => println!("u8"),
+        Some(t) if t == i8_type => println!("i8"),
+        Some(t) if t == u16_type => println!("u16"),
+        Some(t) if t == i16_type => println!("i16"),
+        Some(t) if t == u32_type => println!("u32"),
+        Some(t) if t == i32_type => println!("i32"),
+        Some(t) if t == f32_type => println!("f32"),
+        Some(t) if t == f64_type => println!("f64"),
+        _ => bail!(
+            "The channel type ({:?}) is different than expected.",
+            ch0.type_of()
+        ),
     }
 
     if let Some(ref mut chan) = ts_chan {
