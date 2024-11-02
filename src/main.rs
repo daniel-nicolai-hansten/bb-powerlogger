@@ -148,13 +148,16 @@ fn run() -> Result<()> {
         println!("No timestamp channel. Estimating timestamps.");
     }
 
-    println!("Using channel: {}", ch0.name().unwrap());
+    println!("Using channel: {}", ch0.name().unwrap_or("??".to_string()));
 
-    if ch0.type_of() != Some(TypeId::of::<RawSampleType>()) {
-        bail!(
-            "The channel type ({:?}) is different than expected.",
-            ch0.type_of()
-        );
+    // if ch0.type_of() != Some(TypeId::of::<RawSampleType>()) {
+    //     bail!(
+    //         "The channel type ({:?}) is different than expected.",
+    //         ch0.type_of()
+    //     );
+    // }
+    match ch0.type_of() {
+        
     }
 
     if let Some(ref mut chan) = ts_chan {
