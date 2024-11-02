@@ -1,0 +1,10 @@
+[package]
+name = "bb-powerlogger"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1.0.91"
+chrono = "0.4.38"
+clap = "4.5.20"
+industrial-io = "0.5.2"
