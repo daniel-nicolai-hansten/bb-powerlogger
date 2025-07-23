@@ -5,6 +5,6 @@ edition = "2021"
 
 [dependencies]
 chrono = "0.4.38"
-clap = "4.5.20"
-industrial-io = "0.5.2"
+clap = "4.5.41"
+industrial-io = "0.6.0"
 

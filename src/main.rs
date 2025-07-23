@@ -36,7 +36,7 @@ fn main() {
                 eprintln!("Error filling the buffer: {}", err);
                 process::exit(4);
             }
-            let data = buf.channel_iter::<u16>(&ch0).collect::<Vec<u16>>();
+            let data = buf.channel_iter::<u16>(&ch0).map(|n|*n).collect::<Vec<u16>>();
             let avg = data.iter().fold(0, |acc: u64, x| acc + *x as u64) / data.len() as u64;
             min = *std::cmp::min(data.iter().min().unwrap(), &min);
             max = *std::cmp::max(data.iter().max().unwrap(), &max);
@@ -77,9 +77,9 @@ mod tests {
         assert_eq!(adc2current(4095), 17_307); // Max
     }
     #[test]
-    fn test_currentEstimate() {
+    fn test_current_estimate() {
         let mut accum = 0.0;
-        let mut avgs = vec![2366, 2366, 2366, 2366, 2366];
+        let avgs = vec![2366, 2366, 2366, 2366, 2366];
         let avgcurrent = adc2current(avgs.iter().sum::<u64>() / avgs.len() as u64);
         accum += (avgcurrent as f64) / 3600.0 / 1000.0;
         assert_eq!(accum, 0.0005);
